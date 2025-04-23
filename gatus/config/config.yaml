@@ -8,7 +8,17 @@ alerting:
 endpoints:
   - name: Leantime
     url: <leantime-url> # WARN: DO NOT CHANGE THIS LINE
-    interval:
+    interval: 30s # WARN: DO NOT CHANGE THIS LINE
+    conditions:
+      - type: "status_code"
+        expected: 200
+        message: "Leantime is down! Please check and fix it."
+      - type: "response_time"
+        threshold: 1000 # milliseconds
+        message: "Leantime is slow! Please check and fix it."
+      - type: "keyword"
+        keyword: "Leantime"
+        message: "Leantime is not responding as expected! Please check and fix it."
     conditions:
     alerts:
       - type: ???
@@ -16,7 +26,17 @@ endpoints:
 
   - name: Gatus
     url: <gatus-url> # WARN: DO NOT CHANGE THIS LINE
-    interval:
+    interval: 60s # seconds
+    conditions:
+      - type: "status_code"
+        expected: 200
+        message: "Gatus is down! Please check and fix it."
+      - type: "response_time"
+        threshold: 1000 # milliseconds
+        message: "Gatus is slow! Please check and fix it."
+      - type: "keyword"
+        keyword: "Gatus"
+        message: "Gatus is not responding as expected! Please check and fix it."
     conditions:
     alerts:
       - type: ???
